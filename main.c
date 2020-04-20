@@ -164,9 +164,23 @@ void sysInit()
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 }
+
+void enableInterrupts()
+{
+
+	IntMasterEnable();
+
+	GPIOIntEnable(FourCrossingsPedestrianPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1 | GPIO_INT_PIN_2 |GPIO_INT_PIN_3));
+	
+	GPIOIntEnable(TrainPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1));
+
+}
+
 int main(void)
 {
 	sysInit();
+
+	enableInterrupts();
 
 	setupOutputPins();
 
