@@ -30,7 +30,7 @@
 
 #define SesorLeft GPIO_PIN_0
 #define SesorRight GPIO_PIN_1
-#define GateLED GPIO_PIN_2
+#define GateLEDAndSiren GPIO_PIN_2
 #define TrainPort GPIO_PORTF_BASE
 
 #define GREEN_LED 0x08
@@ -39,6 +39,25 @@
 xSemaphoreHandle xPedestrianSemaphore;
 xSemaphoreHandle xPedestrianToNormalSemaphore;
 xSemaphoreHandle xTrainSemaphore;
+xSemaphoreHandle xTrainToNormalSemaphore;
+
+/*
+ *RED light is 0
+ *Green light is 1
+*/
+
+void TrainCrossingHandler()
+{
+	//give semaphore to run the handler with NOOO context switching
+	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+	xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
+
+	//clear the interupt
+	uint32_t status;
+	status = GPIOIntStatus(TrainPort, true);
+	GPIOIntClear(TrainPort, status);
+	portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+}
 
 void PedestrianCrossingHandler()
 {
@@ -67,6 +86,12 @@ void normalMode(void *pvParameters)
 {
 	while (xSemaphoreTake(xPedestrianToNormalSemaphore, 100) != pdTRUE)
 		;
+	xSemaphoreGive(xPedestrianToNormalSemaphore);
+
+	while (xSemaphoreTake(xTrainToNormalSemaphore, 100) != pdTRUE)
+		;
+	xSemaphoreGive(xTrainToNormalSemaphore);
+
 	setNorthAndSouth(1);
 	setEastAndWest(0);
 	vTaskDelay(tgn_tgs / portTICK_RATE_MS);
@@ -78,6 +103,11 @@ void normalMode(void *pvParameters)
 void pedestrianMode(void *pvParameters)
 {
 	xSemaphoreTake(xPedestrianSemaphore, portMAX_DELAY);
+
+	while (xSemaphoreTake(xTrainToNormalSemaphore, 100) != pdTRUE)
+		;
+	xSemaphoreGive(xTrainToNormalSemaphore);
+
 	setNorthAndSouth(0);
 	setEastAndWest(0);
 	xSemaphoreTake(xPedestrianToNormalSemaphore, 0);
@@ -87,11 +117,24 @@ void pedestrianMode(void *pvParameters)
 
 void trainMode(void *pvParameters)
 {
+	xSemaphoreTake(xTrainSemaphore, portMAX_DELAY);
 
-	//vPrintString("GPIOA interupt handler");
+	setNorthAndSouth(0);
+	setEastAndWest(0);
+
+	//turn on red LED and run the siren
+	GPIOPinWrite(TrainPort, GateLEDAndSiren, 1);
+
+	xSemaphoreTake(xTrainToNormalSemaphore, 0);
+	vTaskDelay(tsafety / portTICK_RATE_MS);
+	xSemaphoreGive(xTrainToNormalSemaphore);
+
+	//turn off red LED and run the siren
+	GPIOPinWrite(TrainPort, GateLEDAndSiren, 0);
 }
 
-void setupInputPins(){
+void setupInputPins()
+{
 	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, North);
 	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, South);
 	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, East);
@@ -102,18 +145,19 @@ void setupInputPins(){
 	GPIOPinTypeGPIOInput(TrainPort, SesorRight);
 }
 
-void setupOutputPins(){
+void setupOutputPins()
+{
 
 	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, North);
 	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, South);
 	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, East);
 	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, West);
-	
-	GPIOPinTypeGPIOOutput(TrainPort, GateLED);
-	
+
+	GPIOPinTypeGPIOOutput(TrainPort, GateLEDAndSiren);
 }
 
-void sysInit(){
+void sysInit()
+{
 	SysCtlClockSet(SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN);
 
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
@@ -123,16 +167,16 @@ void sysInit(){
 int main(void)
 {
 	sysInit();
-	
+
 	setupOutputPins();
-	
+
 	setupInputPins();
 
 	vSemaphoreCreateBinary(xPedestrianSemaphore);
-	
+
 	//this is to make busy wait when pedestrians cross streets
 	vSemaphoreCreateBinary(xPedestrianToNormalSemaphore);
-	
+
 	if (xPedestrianSemaphore != NULL && xPedestrianToNormalSemaphore != NULL)
 	{
 		xTaskCreate(normalMode, "normal", 256, NULL, 1, NULL);
