@@ -7,7 +7,7 @@
 .\objects\queue.o: .\RTE\RTOS\FreeRTOSConfig.h
 .\objects\queue.o: .\RTE\_Target_1\RTE_Components.h
 .\objects\queue.o: C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h
-.\objects\queue.o: C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCZAD.h
+.\objects\queue.o: C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h
 .\objects\queue.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h
 .\objects\queue.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h
 .\objects\queue.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h

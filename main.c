@@ -15,7 +15,7 @@
 #include "task.h"
 #include "semphr.h"
 
-#include "basic_io.h"
+//#include "basic_io.h"
 
 #define tgn_tgs 5000
 #define tge_tgw 2500
@@ -48,7 +48,7 @@ xSemaphoreHandle xTrainSemaphore;
 int globalStateOfNorthAndSouth = 0;
 int globalStateOfEastAndWest = 0;
 
-void delayMS(uint32 delayTimeMs)
+void delayMS(int delayTimeMs)
 {
 	// 1 clock cycle = (1 / 120000000) second
 	// 1 SysCtlDelay = 3 clock cycle (from the docs) = (3 / 120000000) second
@@ -93,7 +93,7 @@ void setEastAndWest(int state)
 {
 	GPIOPinWrite(FourCrossingsLEDsPort, East, state);
 	GPIOPinWrite(FourCrossingsLEDsPort, West, state);
-	globalStateOfEastAndWest = state
+	globalStateOfEastAndWest = state;
 }
 void normalMode(void *pvParameters)
 {
@@ -201,10 +201,7 @@ int main(void)
 
 	vSemaphoreCreateBinary(xPedestrianSemaphore);
 
-	//this is to make busy wait when pedestrians cross streets
-	vSemaphoreCreateBinary(xPedestrianToNormalSemaphore);
-
-	if (xPedestrianSemaphore != NULL && xPedestrianToNormalSemaphore != NULL)
+	if (xPedestrianSemaphore != NULL )
 	{
 		xTaskCreate(normalMode, "normal", 256, NULL, 1, NULL);
 		xTaskCreate(pedestrianMode, "pedestrian", 256, NULL, 2, NULL);

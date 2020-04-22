@@ -17,7 +17,7 @@
 .\objects\main.o: .\RTE\RTOS\FreeRTOSConfig.h
 .\objects\main.o: .\RTE\_Target_1\RTE_Components.h
 .\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h
-.\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCZAD.h
+.\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h
 .\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h
 .\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h
 .\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h
@@ -34,4 +34,3 @@
 .\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h
 .\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\semphr.h
 .\objects\main.o: C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h
-.\objects\main.o: D:\Work\Masters\Embedded Systems\source-code-for-Cortex-M3-examples-using-the Keil-MDK-Simulator\FreeRTOS-Source\demo_code\basic_io.h

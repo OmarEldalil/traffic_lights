@@ -120,7 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>UL2CM3</Key>
-          <Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC1000 -FD20000000 -FF0TM4C129_1024 -FL0100000 -FS00 -FP0($$Device:TM4C1294NCZAD$Flash\TM4C129_1024.FLM)</Name>
+          <Name>UL2CM3(-S0 -C0 -P0 )  -FN1 -FC1000 -FD20000000 -FF0TM4C129_1024 -FL0100000 -FS00 -FP0($$Device:TM4C1294NCPDT$Flash\TM4C129_1024.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
       <Breakpoint/>
