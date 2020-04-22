@@ -59,7 +59,9 @@ __heap_limit
                 EXPORT  __Vectors
                 EXPORT  __Vectors_End
                 EXPORT  __Vectors_Size
-
+	EXTERN  PedestrianCrossingHandler
+	EXTERN TrainCrossingHandler
+	
 __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     Reset_Handler             ; Reset Handler
                 DCD     NMI_Handler               ; NMI Handler
@@ -80,7 +82,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 ; External Interrupts
 
                 DCD     GPIOA_Handler             ;   0: GPIO Port A
-                DCD     GPIOB_Handler             ;   1: GPIO Port B
+                DCD     PedestrianCrossingHandler             ;   1: GPIO Port B
                 DCD     GPIOC_Handler             ;   2: GPIO Port C
                 DCD     GPIOD_Handler             ;   3: GPIO Port D
                 DCD     GPIOE_Handler             ;   4: GPIO Port E
@@ -109,7 +111,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     COMP2_Handler             ;  27: Analog Comparator 2
                 DCD     SYSCTL_Handler            ;  28: System Control (PLL, OSC, BO)
                 DCD     FLASH_Handler             ;  29: FLASH Control
-                DCD     GPIOF_Handler             ;  30: GPIO Port F
+                DCD     TrainCrossingHandler             ;  30: GPIO Port F
                 DCD     GPIOG_Handler             ;  31: GPIO Port G
                 DCD     GPIOH_Handler             ;  32: GPIO Port H
                 DCD     UART2_Handler             ;  33: UART2 Rx and Tx

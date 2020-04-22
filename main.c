@@ -15,7 +15,7 @@
 #include "task.h"
 #include "semphr.h"
 
-//#include "basic_io.h"
+#include "basic_io.h"
 
 #define tgn_tgs 5000
 #define tge_tgw 2500
