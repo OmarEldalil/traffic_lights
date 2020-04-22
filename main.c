@@ -119,16 +119,10 @@ void pedestrianMode(void *pvParameters)
 {
 	xSemaphoreTake(xPedestrianSemaphore, portMAX_DELAY);
 
-	int tempNS = globalStateOfNorthAndSouth;
-	int tempES = globalStateOfEastAndWest;
-
 	setNorthAndSouth(0);
 	setEastAndWest(0);
-
+	
 	delayMS(tcross);
-
-	setNorthAndSouth(tempNS);
-	setEastAndWest(tempES);
 }
 
 void trainMode(void *pvParameters)
@@ -137,6 +131,7 @@ void trainMode(void *pvParameters)
 
 	int tempNS = globalStateOfNorthAndSouth;
 	int tempES = globalStateOfEastAndWest;
+
 	setNorthAndSouth(0);
 	setEastAndWest(0);
 
@@ -212,8 +207,8 @@ int main(void)
 	if (xPedestrianSemaphore != NULL && xPedestrianToNormalSemaphore != NULL)
 	{
 		xTaskCreate(normalMode, "normal", 256, NULL, 1, NULL);
-		xTaskCreate(pedestrianMode, "pedestrian", 256, NULL, 1, NULL);
-		xTaskCreate(trainMode, "train", 256, NULL, 1, NULL);
+		xTaskCreate(pedestrianMode, "pedestrian", 256, NULL, 2, NULL);
+		xTaskCreate(trainMode, "train", 256, NULL, 3, NULL);
 
 		vTaskStartScheduler();
 	}
