@@ -59,7 +59,7 @@ void delayMS(int delayTimeMs)
 
 void TrainCrossingHandler()
 {
-	//give semaphore to run the handler with NOOO context switching
+	//give semaphore to run the handler with context switching
 	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 	xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
 
@@ -103,16 +103,16 @@ void normalMode(void *pvParameters)
 	//busy waiting
 	delayMS(tgn_tgs);
 
-	//this delay just to make this task blocked to check if the pedestrians' buttons are clicked to run pedestrianMode
-	vTaskDelay(10);
+	//to make this task blocked to check if the pedestrians' buttons are clicked to run pedestrianMode
+	taskYIELD();
 
 	setNorthAndSouth(0);
 	setEastAndWest(1);
 
 	delayMS(tge_tgw);
 
-	//this delay just to make this task blocked to check if the pedestrians' buttons are clicked to run pedestrianMode
-	vTaskDelay(10);
+	//to make this task blocked to check if the pedestrians' buttons are clicked to run pedestrianMode
+	taskYIELD();
 }
 
 void pedestrianMode(void *pvParameters)
@@ -121,7 +121,7 @@ void pedestrianMode(void *pvParameters)
 
 	setNorthAndSouth(0);
 	setEastAndWest(0);
-	
+
 	delayMS(tcross);
 }
 
@@ -201,7 +201,7 @@ int main(void)
 
 	vSemaphoreCreateBinary(xPedestrianSemaphore);
 
-	if (xPedestrianSemaphore != NULL )
+	if (xPedestrianSemaphore != NULL)
 	{
 		xTaskCreate(normalMode, "normal", 256, NULL, 1, NULL);
 		xTaskCreate(pedestrianMode, "pedestrian", 256, NULL, 2, NULL);
