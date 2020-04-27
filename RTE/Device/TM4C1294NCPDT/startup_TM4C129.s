@@ -24,7 +24,8 @@
 ;/*
 ;//-------- <<< Use Configuration Wizard in Context Menu >>> ------------------
 ;*/
-
+	EXTERN  PedestrianCrossingHandler
+	EXTERN TrainCrossingHandler
 
 ; <h> Stack Configuration
 ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
@@ -59,8 +60,7 @@ __heap_limit
                 EXPORT  __Vectors
                 EXPORT  __Vectors_End
                 EXPORT  __Vectors_Size
-	EXTERN  PedestrianCrossingHandler
-	EXTERN TrainCrossingHandler
+
 	
 __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     Reset_Handler             ; Reset Handler
@@ -132,7 +132,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     ADC1SS2_Handler           ;  48: ADC1 Sequence 2
                 DCD     ADC1SS3_Handler           ;  49: ADC1 Sequence 3
                 DCD     EBI0_Handler              ;  50: External Bus Interface 0
-                DCD     TrainCrossingHandler             ;  51: GPIO Port J
+                DCD     GPIOJ_Handler             ;  51: GPIO Port J
                 DCD     GPIOK_Handler             ;  52: GPIO Port K
                 DCD     GPIOL_Handler             ;  53: GPIO Port L
                 DCD     SSI2_Handler              ;  54: SSI2 Rx and Tx

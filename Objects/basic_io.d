@@ -1,16 +1,16 @@
-.\objects\basic_io.o: basic_io.c
-.\objects\basic_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h
-.\objects\basic_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\basic_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\basic_io.o: .\RTE\RTOS\FreeRTOSConfig.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h
-.\objects\basic_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\basic_io.o: .\RTE\_Target_1\RTE_Components.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h
-.\objects\basic_io.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h
+./objects/basic_io.o: basic_io.c \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  RTE\RTOS\FreeRTOSConfig.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  RTE\_Target_1\RTE_Components.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\GCC\ARM_CM4F\portmacro.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h

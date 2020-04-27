@@ -78,17 +78,17 @@ void TrainCrossingHandler()
 
 	uint32_t status=0;
 
-	status = GPIOIntStatus(GPIO_PORTF_BASE,true);
-	GPIOIntClear(GPIO_PORTF_BASE,status);
+	status = GPIOIntStatus(GPIO_PORTJ_BASE,true);
+	GPIOIntClear(GPIO_PORTJ_BASE,status);
 
 	if( (status & GPIO_INT_PIN_0) == GPIO_INT_PIN_0) //Then there was a pin0 interrupt
 	{
 		if(0 == trainFlag) //no train yet 
 		{
-			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
-			portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
-			trainFlag = 1;
+			trainFlag = 1; //train mode is on
 			trainSource = 0; // record the angle the train came from
+			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 		}
 		else //there is a train
 		{
@@ -109,14 +109,14 @@ void TrainCrossingHandler()
 			}
 		}
 	} 
-	if( (status & GPIO_INT_PIN_0) == GPIO_INT_PIN_0) ///Then there was a pin1 interrupt
+	if( (status & GPIO_INT_PIN_1) == GPIO_INT_PIN_1) ///Then there was a pin1 interrupt
 	{
 		if(0 == trainFlag) //no train yet 
 		{
-			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
-			portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
-			trainFlag = 1;
+			trainFlag = 1; // train mode on
 			trainSource = 1; // record the angle the train came from
+			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 		}
 		else //there is a train
 		{
@@ -173,11 +173,11 @@ void setEastAndWest(int state)
 
 void setupInputPins()
 {
-	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, North);
-	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, South);
-	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, East);
-	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, West);
-	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, South);
+//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, North);
+//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, South);
+//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, East);
+//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, West);
+//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, South);
 
 	GPIOPinTypeGPIOInput(TrainPort, SesorLeft);
 	GPIOPinTypeGPIOInput(TrainPort, SesorRight);
@@ -188,12 +188,15 @@ void setupInputPins()
 void setupOutputPins()
 {
 
-	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, North);
-	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, South);
-	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, East);
-	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, West);
+//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, North);
+//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, South);
+//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, East);
+//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, West);
 
-	GPIOPinTypeGPIOOutput(TrainPort, GateLEDAndSiren);
+	//GPIOPinTypeGPIOOutput(TrainPort, GateLEDAndSiren);
+	
+	GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0);
+	GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_1);
 }
 
 void sysInit()
@@ -201,15 +204,17 @@ void sysInit()
     //
     // Set the clocking to run directly from the crystal at 120MHz.
     //
-    g_ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
-                                             SYSCTL_OSC_MAIN |
-                                             SYSCTL_USE_PLL |
-                                             SYSCTL_CFG_VCO_480), 120000000);
-
-
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+	g_ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+											 SYSCTL_OSC_MAIN |
+											 SYSCTL_USE_PLL |
+											 SYSCTL_CFG_VCO_480), 120000000);
+   g_ui32SysClock = SysCtlClockGet();
+SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
+//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOJ);
+		while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOJ));
 }
 void timerStart(uint32_t seconds)
 {
@@ -223,10 +228,15 @@ void enableInterrupts()
 
 
 	//GPIOIntEnable(FourCrossingsPedestrianPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1 | GPIO_INT_PIN_2 | GPIO_INT_PIN_3));
+	
+	GPIOIntEnable(TrainPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1));
 	GPIOIntTypeSet(TrainPort,GPIO_PIN_0,GPIO_FALLING_EDGE);
 	GPIOIntTypeSet(TrainPort,GPIO_PIN_1,GPIO_FALLING_EDGE);
-	GPIOIntEnable(TrainPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1));
+	IntPrioritySet(INT_GPIOJ_TM4C129 ,0xA0);
+	IntRegister(INT_GPIOJ_TM4C129,TrainCrossingHandler);
+	IntEnable(INT_GPIOJ_TM4C129);
 	IntMasterEnable();
+	
 }
 
 void eastWest(void *pvParameters)
@@ -238,7 +248,9 @@ void eastWest(void *pvParameters)
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
 		//nl3ab fe el lomad
 		//vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TGE_TGW ) );
+		GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, 0xFF);
 		delayMS(TGE_TGW);
+		GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, 0x0);
 		xSemaphoreGive(xNormalSemaphore);
 		taskYIELD();
 	}
@@ -251,7 +263,9 @@ void northSouth(void *pvParameters)
 	{
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
 		//nl3ab fe el lomad
+		GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0x1);
 		delayMS(TGN_TGS);
+		GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0x0);
 		//vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TGN_TGS ) );
 		
 		xSemaphoreGive(xNormalSemaphore);
@@ -279,11 +293,11 @@ void trainMode(void *pvParameters)
 	for (;;)
 	{
 		xSemaphoreTake(xTrainSemaphore, portMAX_DELAY);
-		int tempNS = globalStateOfNorthAndSouth;
-		int tempES = globalStateOfEastAndWest;
+//		int tempNS = globalStateOfNorthAndSouth;
+//		int tempES = globalStateOfEastAndWest;
 
-		setNorthAndSouth(0);
-		setEastAndWest(0);
+//		setNorthAndSouth(0);
+//		setEastAndWest(0);
 
 		//turn on red LED and run the siren
 		GPIOPinWrite(TrainPort, GateLEDAndSiren, 1);
@@ -301,8 +315,8 @@ void trainMode(void *pvParameters)
 		//turn off red LED and run the siren
 		GPIOPinWrite(TrainPort, GateLEDAndSiren, 0);
 
-		setNorthAndSouth(tempNS);
-		setEastAndWest(tempES);
+//		setNorthAndSouth(tempNS);
+//		setEastAndWest(tempES);
 	}
 }
 
@@ -314,10 +328,9 @@ int main(void)
 
 	setupInputPins();
 	enableInterrupts();
-
-	vSemaphoreCreateBinary(xNormalSemaphore);
-	vSemaphoreCreateBinary(xPedestrianSemaphore);
-	vSemaphoreCreateBinary(xTrainSemaphore);
+	xNormalSemaphore = xSemaphoreCreateBinary();
+	xPedestrianSemaphore = xSemaphoreCreateBinary();
+	xTrainSemaphore = xSemaphoreCreateBinary();
 
 	if ( xNormalSemaphore != NULL && xPedestrianSemaphore != NULL && xTrainSemaphore != NULL)
 	{

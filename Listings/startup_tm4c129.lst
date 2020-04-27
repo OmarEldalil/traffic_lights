@@ -42,57 +42,57 @@ ARM Macro Assembler    Page 1
    25 00000000         ;//-------- <<< Use Configuration Wizard in Context Menu
                         >>> ------------------
    26 00000000         ;*/
-   27 00000000         
-   28 00000000         
-   29 00000000         ; <h> Stack Configuration
-   30 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   31 00000000         ; </h>
-   32 00000000         
-   33 00000000 00000200 
+   27 00000000                 EXTERN           PedestrianCrossingHandler
+   28 00000000                 EXTERN           TrainCrossingHandler
+   29 00000000         
+   30 00000000         ; <h> Stack Configuration
+   31 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   32 00000000         ; </h>
+   33 00000000         
+   34 00000000 00000200 
                        Stack_Size
                                EQU              0x00000200
-   34 00000000         
-   35 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
+   35 00000000         
+   36 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
 =3
-   36 00000000         Stack_Mem
+   37 00000000         Stack_Mem
                                SPACE            Stack_Size
-   37 00000200         __initial_sp
-   38 00000200         
+   38 00000200         __initial_sp
    39 00000200         
-   40 00000200         ; <h> Heap Configuration
-   41 00000200         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   42 00000200         ; </h>
-   43 00000200         
+   40 00000200         
+   41 00000200         ; <h> Heap Configuration
+   42 00000200         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   43 00000200         ; </h>
 
 
 
 ARM Macro Assembler    Page 2 
 
 
-   44 00000200 00000000 
+   44 00000200         
+   45 00000200 00000000 
                        Heap_Size
                                EQU              0x00000000
-   45 00000200         
-   46 00000200                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+   46 00000200         
+   47 00000200                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
-   47 00000000         __heap_base
-   48 00000000         Heap_Mem
+   48 00000000         __heap_base
+   49 00000000         Heap_Mem
                                SPACE            Heap_Size
-   49 00000000         __heap_limit
-   50 00000000         
+   50 00000000         __heap_limit
    51 00000000         
-   52 00000000                 PRESERVE8
-   53 00000000                 THUMB
-   54 00000000         
+   52 00000000         
+   53 00000000                 PRESERVE8
+   54 00000000                 THUMB
    55 00000000         
-   56 00000000         ; Vector Table Mapped to Address 0 at Reset
-   57 00000000         
-   58 00000000                 AREA             RESET, DATA, READONLY
-   59 00000000                 EXPORT           __Vectors
-   60 00000000                 EXPORT           __Vectors_End
-   61 00000000                 EXPORT           __Vectors_Size
-   62 00000000                 EXTERN           PedestrianCrossingHandler
-   63 00000000                 EXTERN           TrainCrossingHandler
+   56 00000000         
+   57 00000000         ; Vector Table Mapped to Address 0 at Reset
+   58 00000000         
+   59 00000000                 AREA             RESET, DATA, READONLY
+   60 00000000                 EXPORT           __Vectors
+   61 00000000                 EXPORT           __Vectors_End
+   62 00000000                 EXPORT           __Vectors_Size
+   63 00000000         
    64 00000000         
    65 00000000 00000000 
                        __Vectors
@@ -235,7 +235,7 @@ ARM Macro Assembler    Page 4
                                                             uence 3
   134 00000108 00000000        DCD              EBI0_Handler ;  50: External Bu
                                                             s Interface 0
-  135 0000010C 00000000        DCD              TrainCrossingHandler 
+  135 0000010C 00000000        DCD              GPIOJ_Handler 
                                                             ;  51: GPIO Port J
   136 00000110 00000000        DCD              GPIOK_Handler 
                                                             ;  52: GPIO Port K
@@ -1307,17 +1307,17 @@ ARM Macro Assembler    Page 21
               00000000 
               00000200 
               00000000 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
-interwork --depend=.\objects\startup_tm4c129.d -o.\objects\startup_tm4c129.o -I
-.\RTE\RTOS -I.\RTE\_Target_1 -IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS
--FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include -IC:\Users\A7MA_\AppData\Local\Ar
-m\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include -IC:\Users\A7MA_\AppData\Local
-\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F -IC:\Users\A
-7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\A7MA
-_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129 --predefin
-e="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ S
-ETA 1" --predefine="TM4C1294NCPDT SETA 1" --list=.\listings\startup_tm4c129.lst
- RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --depen
+d=.\objects\startup_tm4c129.d -o.\objects\startup_tm4c129.o -I.\RTE\RTOS -I.\RT
+E\_Target_1 -IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\
+CMSIS\RTOS2\FreeRTOS\Include -IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS
+-FreeRTOS\10.3.0\Source\include -IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CM
+SIS-FreeRTOS\10.3.0\Source\portable\GCC\ARM_CM4F -IC:\Users\A7MA_\AppData\Local
+\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\A7MA_\AppData\Local\Ar
+m\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129 --predefine="__EVAL SETA 1" 
+--predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ SETA 1" --predefine
+="TM4C1294NCPDT SETA 1" --list=.\listings\startup_tm4c129.lst RTE\Device\TM4C12
+94NCPDT\startup_TM4C129.s
 
 
 
@@ -1328,7 +1328,7 @@ STACK 00000000
 
 Symbol: STACK
    Definitions
-      At line 35 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 36 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       None
 Comment: STACK unused
@@ -1336,7 +1336,7 @@ Stack_Mem 00000000
 
 Symbol: Stack_Mem
    Definitions
-      At line 36 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 37 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 1008 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 1010 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
@@ -1345,7 +1345,7 @@ __initial_sp 00000200
 
 Symbol: __initial_sp
    Definitions
-      At line 37 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 38 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 65 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 Comment: __initial_sp used once
@@ -1360,7 +1360,7 @@ HEAP 00000000
 
 Symbol: HEAP
    Definitions
-      At line 46 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 47 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       None
 Comment: HEAP unused
@@ -1368,7 +1368,7 @@ Heap_Mem 00000000
 
 Symbol: Heap_Mem
    Definitions
-      At line 48 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 49 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 1007 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 1009 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
@@ -1377,7 +1377,7 @@ __heap_base 00000000
 
 Symbol: __heap_base
    Definitions
-      At line 47 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 48 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       None
 Comment: __heap_base unused
@@ -1385,7 +1385,7 @@ __heap_limit 00000000
 
 Symbol: __heap_limit
    Definitions
-      At line 49 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 50 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       None
 Comment: __heap_limit unused
@@ -1400,7 +1400,7 @@ RESET 00000000
 
 Symbol: RESET
    Definitions
-      At line 58 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 59 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       None
 Comment: RESET unused
@@ -1410,7 +1410,7 @@ Symbol: __Vectors
    Definitions
       At line 65 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 59 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 60 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 199 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 __Vectors_End 00000200
@@ -1419,7 +1419,7 @@ Symbol: __Vectors_End
    Definitions
       At line 197 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 60 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 61 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 199 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 3 symbols
@@ -1727,8 +1727,9 @@ Symbol: GPIOJ_Handler
    Definitions
       At line 570 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
+      At line 135 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 571 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
-Comment: GPIOJ_Handler used once
+
 GPIOK_Handler 00000082
 
 Symbol: GPIOK_Handler
@@ -1747,13 +1748,13 @@ Symbol: GPIOL_Handler
       At line 137 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 583 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
-GPIOM_Handler 000000BE
 
 
 
 ARM Macro Assembler    Page 6 Alphabetic symbol ordering
 Relocatable symbols
 
+GPIOM_Handler 000000BE
 
 Symbol: GPIOM_Handler
    Definitions
@@ -1812,13 +1813,13 @@ GPIOP4_Handler 000000CC
 Symbol: GPIOP4_Handler
    Definitions
       At line 798 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 7 Alphabetic symbol ordering
 Relocatable symbols
 
+   Uses
       At line 164 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 799 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
@@ -1880,9 +1881,9 @@ GPIOQ3_Handler 000000DA
 
 
 
-
 ARM Macro Assembler    Page 8 Alphabetic symbol ordering
 Relocatable symbols
+
 
 Symbol: GPIOQ3_Handler
    Definitions
@@ -1942,13 +1943,13 @@ Symbol: GPIOS_Handler
    Definitions
       At line 876 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 177 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 
 
 ARM Macro Assembler    Page 9 Alphabetic symbol ordering
 Relocatable symbols
 
+      At line 177 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 877 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 GPIOT_Handler 0000010A
@@ -2007,13 +2008,13 @@ Symbol: HIMSCANKEYBOARD_Handler
 
 HardFault_Handler 0000000A
 
-Symbol: HardFault_Handler
 
 
 
 ARM Macro Assembler    Page 10 Alphabetic symbol ordering
 Relocatable symbols
 
+Symbol: HardFault_Handler
    Definitions
       At line 224 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
@@ -2072,13 +2073,13 @@ Symbol: I2C5_Handler
       At line 750 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 155 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
-      At line 751 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 
 
 ARM Macro Assembler    Page 11 Alphabetic symbol ordering
 Relocatable symbols
 
+      At line 751 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 I2C6_Handler 000000F8
 
@@ -2137,13 +2138,13 @@ Symbol: MemManage_Handler
 NMI_Handler 00000008
 
 Symbol: NMI_Handler
-   Definitions
 
 
 
 ARM Macro Assembler    Page 12 Alphabetic symbol ordering
 Relocatable symbols
 
+   Definitions
       At line 219 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 67 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
@@ -2205,9 +2206,9 @@ Symbol: PWM0_3_Handler
 
 
 
-
 ARM Macro Assembler    Page 13 Alphabetic symbol ordering
 Relocatable symbols
+
 
 PendSV_Handler 00000016
 
@@ -2267,13 +2268,13 @@ SSI2_Handler 00000086
 
 Symbol: SSI2_Handler
    Definitions
-      At line 588 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 
 
 ARM Macro Assembler    Page 14 Alphabetic symbol ordering
 Relocatable symbols
 
+      At line 588 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 138 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 589 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
@@ -2332,13 +2333,13 @@ Symbol: TIMER0A_Handler
       At line 103 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 379 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
-TIMER0B_Handler 00000042
 
 
 
 ARM Macro Assembler    Page 15 Alphabetic symbol ordering
 Relocatable symbols
 
+TIMER0B_Handler 00000042
 
 Symbol: TIMER0B_Handler
    Definitions
@@ -2397,13 +2398,13 @@ TIMER3B_Handler 00000062
 Symbol: TIMER3B_Handler
    Definitions
       At line 480 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
-   Uses
 
 
 
 ARM Macro Assembler    Page 16 Alphabetic symbol ordering
 Relocatable symbols
 
+   Uses
       At line 120 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 481 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
@@ -2465,9 +2466,9 @@ TIMER7A_Handler 000000F4
 
 
 
-
 ARM Macro Assembler    Page 17 Alphabetic symbol ordering
 Relocatable symbols
+
 
 Symbol: TIMER7A_Handler
    Definitions
@@ -2527,13 +2528,13 @@ Symbol: UART4_Handler
    Definitions
       At line 606 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 141 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 
 
 ARM Macro Assembler    Page 18 Alphabetic symbol ordering
 Relocatable symbols
 
+      At line 141 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 607 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 UART5_Handler 0000008E
@@ -2592,13 +2593,13 @@ Symbol: USB0_Handler
 
 UsageFault_Handler 00000010
 
-Symbol: UsageFault_Handler
 
 
 
 ARM Macro Assembler    Page 19 Alphabetic symbol ordering
 Relocatable symbols
 
+Symbol: UsageFault_Handler
    Definitions
       At line 239 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
@@ -2657,13 +2658,13 @@ Comment: WTIMER2A_Handler used once
 WTIMER2B_Handler 000000AA
 
 Symbol: WTIMER2B_Handler
-   Definitions
 
 
 
 ARM Macro Assembler    Page 20 Alphabetic symbol ordering
 Relocatable symbols
 
+   Definitions
       At line 696 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 697 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
@@ -2722,13 +2723,13 @@ Symbol: __user_initial_stackheap
    Definitions
       At line 1005 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 1004 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 
 
 ARM Macro Assembler    Page 21 Alphabetic symbol ordering
 Relocatable symbols
 
+      At line 1004 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 Comment: __user_initial_stackheap used once
 133 symbols
 
@@ -2741,18 +2742,18 @@ Heap_Size 00000000
 
 Symbol: Heap_Size
    Definitions
-      At line 44 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 45 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 48 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 49 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 1009 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 Stack_Size 00000200
 
 Symbol: Stack_Size
    Definitions
-      At line 33 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 34 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 36 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 37 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 1008 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 __Vectors_Size 00000200
@@ -2761,7 +2762,7 @@ Symbol: __Vectors_Size
    Definitions
       At line 199 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 61 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 62 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 Comment: __Vectors_Size used once
 3 symbols
 
@@ -2774,7 +2775,7 @@ PedestrianCrossingHandler 00000000
 
 Symbol: PedestrianCrossingHandler
    Definitions
-      At line 62 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 27 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
       At line 85 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 Comment: PedestrianCrossingHandler used once
@@ -2790,10 +2791,10 @@ TrainCrossingHandler 00000000
 
 Symbol: TrainCrossingHandler
    Definitions
-      At line 63 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 28 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 135 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
-Comment: TrainCrossingHandler used once
+      None
+Comment: TrainCrossingHandler unused
 __main 00000000
 
 Symbol: __main

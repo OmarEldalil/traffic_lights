@@ -1,31 +1,32 @@
-.\objects\main.o: ..\traffic_lights\main.c
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\inc/hw_ints.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\inc/hw_memmap.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/debug.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/gpio.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/interrupt.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/pin_map.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/rom.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/rom_map.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/sysctl.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/uart.h
-.\objects\main.o: C:\ti\TivaWare_C_Series-2.1.4.178\driverlib/timer.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\main.o: .\RTE\RTOS\FreeRTOSConfig.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\main.o: .\RTE\_Target_1\RTE_Components.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\semphr.h
-.\objects\main.o: C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h
-.\objects\main.o: ..\traffic_lights\basic_io.h
+./objects/main.o: ..\traffic_lights\main.c \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\inc\hw_ints.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\inc\hw_memmap.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\debug.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\gpio.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\interrupt.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\pin_map.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom_map.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\sysctl.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\uart.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\timer.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
+  RTE\RTOS\FreeRTOSConfig.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  RTE\_Target_1\RTE_Components.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\GCC\ARM_CM4F\portmacro.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\semphr.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h \
+  C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h \
+  ..\traffic_lights\basic_io.h

@@ -50,7 +50,7 @@ void vPrintString( const char *pcString )
 	exclusion. */
 	vTaskSuspendAll();
 	{
-		printf( pcString );
+		printf( "%s", pcString );
 	}
 	xTaskResumeAll();
 }
@@ -62,7 +62,7 @@ void vPrintStringAndNumber( const char *pcString, unsigned long ulValue )
 	exclusion. */
 	vTaskSuspendAll();
 	{
-		printf( "%s %u\n", pcString, ulValue );
+		printf( "%s %lu\n", pcString, ulValue );
 	}
 	xTaskResumeAll();
 }
