@@ -1,162 +1,163 @@
 Dependencies for Project 'traffic_lights', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (..\traffic_lights\main.c)(0x5EA4DCDF)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\traffic_lights\main.c)(0x5EA6F1B2)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B267A)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\inc\hw_ints.h)(0x5E94F6AB)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\inc\hw_memmap.h)(0x5E94F6AB)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\debug.h)(0x5E94F669)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\gpio.h)(0x5E94F669)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\interrupt.h)(0x5E94F669)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\pin_map.h)(0x5E94F669)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom.h)(0x5E94F669)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom_map.h)(0x5E94F669)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\sysctl.h)(0x5E94F669)
-I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\uart.h)(0x5E94F669)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\inc\hw_ints.h)(0x5E542715)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\inc\hw_memmap.h)(0x5E542715)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\debug.h)(0x5E5426F3)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\gpio.h)(0x5E5426F3)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\interrupt.h)(0x5E5426F3)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\pin_map.h)(0x5E5426F3)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom.h)(0x5E5426F3)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom_map.h)(0x5E5426F3)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\sysctl.h)(0x5E95A774)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\uart.h)(0x5E5426F3)
+I (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\timer.h)(0x5E5426F3)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\semphr.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h)(0x5DE7412E)
-I (..\traffic_lights\basic_io.h)(0x4CEE7ECE)
-F (.\basic_io.c)(0x4D02166E)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\basic_io.o --omf_browse .\objects\basic_io.crf --depend .\objects\basic_io.d)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\semphr.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h)(0x5DE7412E)
+I (..\traffic_lights\basic_io.h)(0x5EA6F040)
+F (.\basic_io.c)(0x5EA6F040)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\basic_io.o --omf_browse .\objects\basic_io.crf --depend .\objects\basic_io.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9B267A)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-F (.\basic_io.h)(0x4CEE7ECE)()
-F (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rvmdk\driverlib.lib)(0x5E95024A)()
-F (RTE\Device\TM4C1294NCPDT\startup_TM4C129.s)(0x5EA07CB5)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "TM4C1294NCPDT SETA 1"--list .\listings\startup_tm4c129.lst --xref -o .\objects\startup_tm4c129.o --depend .\objects\startup_tm4c129.d)
-F (RTE\Device\TM4C1294NCPDT\system_TM4C129.c)(0x5253AC24)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\system_tm4c129.o --omf_browse .\objects\system_tm4c129.crf --depend .\objects\system_tm4c129.d)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+F (.\basic_io.h)(0x5EA6F040)()
+F (C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rvmdk\driverlib.lib)(0x5E5426F3)()
+F (RTE\Device\TM4C1294NCPDT\startup_TM4C129.s)(0x5EA6F0BC)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "TM4C1294NCPDT SETA 1"--list .\listings\startup_tm4c129.lst --xref -o .\objects\startup_tm4c129.o --depend .\objects\startup_tm4c129.d)
+F (RTE\Device\TM4C1294NCPDT\system_TM4C129.c)(0x5EA6F2A6)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\system_tm4c129.o --omf_browse .\objects\system_tm4c129.crf --depend .\objects\system_tm4c129.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h)(0x530EF2F6)
-I (C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h)(0x530EF2F6)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D25E516)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
-I (C:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h)(0x51BFFEEA)
-F (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Source\freertos_evr.c)(0x5D8845D4)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\freertos_evr.o --omf_browse .\objects\freertos_evr.crf --depend .\objects\freertos_evr.d)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h)(0x530EF2F6)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h)(0x530EF2F6)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D25E516)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D25E516)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E516)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h)(0x51BFFEEA)
+F (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Source\freertos_evr.c)(0x5D8845D4)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\freertos_evr.o --omf_browse .\objects\freertos_evr.crf --depend .\objects\freertos_evr.d)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\semphr.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\event_groups.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\timers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\stream_buffer.h)(0x5DE7412E)
-F (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\list.c)(0x5DE7412E)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\list.o --omf_browse .\objects\list.crf --depend .\objects\list.d)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\semphr.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\event_groups.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\timers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\stream_buffer.h)(0x5DE7412E)
+F (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\list.c)(0x5DE7412E)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\list.o --omf_browse .\objects\list.crf --depend .\objects\list.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B267A)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-F (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\MemMang\heap_4.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\heap_4.o --omf_browse .\objects\heap_4.crf --depend .\objects\heap_4.d)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+F (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\MemMang\heap_4.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\heap_4.o --omf_browse .\objects\heap_4.crf --depend .\objects\heap_4.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B267A)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-F (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\port.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\port.o --omf_browse .\objects\port.crf --depend .\objects\port.d)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+F (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\port.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\port.o --omf_browse .\objects\port.crf --depend .\objects\port.d)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-F (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\queue.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\queue.o --omf_browse .\objects\queue.crf --depend .\objects\queue.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B267A)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h)(0x5DE7412E)
-F (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\tasks.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\omar\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\tasks.o --omf_browse .\objects\tasks.crf --depend .\objects\tasks.d)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+F (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\queue.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\queue.o --omf_browse .\objects\queue.crf --depend .\objects\queue.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B267A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
-I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
-I (.\RTE\_Target_1\RTE_Components.h)(0x5EA07897)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\timers.h)(0x5DE7412E)
-I (C:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\stack_macros.h)(0x5DE7412E)
-F (RTE\RTOS\FreeRTOSConfig.h)(0x5D8845D4)()
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\queue.h)(0x5DE7412E)
+F (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\tasks.c)(0x5DE74130)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I C:\ti\TivaWare_C_Series-2.1.4.178 -I ..\traffic_lights-I.\RTE\RTOS-I.\RTE\_Target_1-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F-IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Users\A7MA_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="529" -D_RTE_ -DTM4C1294NCPDT-o .\objects\tasks.o --omf_browse .\objects\tasks.crf --depend .\objects\tasks.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9B267A)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9B2678)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h)(0x5DE7412E)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9B2678)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9B2678)
+I (.\RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include\freertos_evr.h)(0x5D8845D4)
+I (.\RTE\_Target_1\RTE_Components.h)(0x5EA6F040)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\projdefs.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\portable.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\deprecated_definitions.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F\portmacro.h)(0x5DE74130)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\mpu_wrappers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\task.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\list.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\timers.h)(0x5DE7412E)
+I (C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\stack_macros.h)(0x5DE7412E)
+F (RTE\RTOS\FreeRTOSConfig.h)(0x5EA6F0BC)()

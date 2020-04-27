@@ -191,7 +191,7 @@ ARM Macro Assembler    Page 3
                                                             )
   113 000000B4 00000000        DCD              FLASH_Handler ;  29: FLASH Cont
                                                             rol
-  114 000000B8 00000000        DCD              TrainCrossingHandler 
+  114 000000B8 00000000        DCD              GPIOF_Handler 
                                                             ;  30: GPIO Port F
 
 
@@ -235,7 +235,7 @@ ARM Macro Assembler    Page 4
                                                             uence 3
   134 00000108 00000000        DCD              EBI0_Handler ;  50: External Bu
                                                             s Interface 0
-  135 0000010C 00000000        DCD              GPIOJ_Handler 
+  135 0000010C 00000000        DCD              TrainCrossingHandler 
                                                             ;  51: GPIO Port J
   136 00000110 00000000        DCD              GPIOK_Handler 
                                                             ;  52: GPIO Port K
@@ -1309,15 +1309,15 @@ ARM Macro Assembler    Page 21
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=.\objects\startup_tm4c129.d -o.\objects\startup_tm4c129.o -I
-.\RTE\RTOS -I.\RTE\_Target_1 -IC:\Users\omar\AppData\Local\Arm\Packs\ARM\CMSIS-
-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include -IC:\Users\omar\AppData\Local\Arm\
-Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include -IC:\Users\omar\AppData\Local\Ar
-m\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F -IC:\Users\omar
-\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\omar\App
-Data\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129 --predefine="__
-EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ SETA 1
-" --predefine="TM4C1294NCPDT SETA 1" --list=.\listings\startup_tm4c129.lst RTE\
-Device\TM4C1294NCPDT\startup_TM4C129.s
+.\RTE\RTOS -I.\RTE\_Target_1 -IC:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS
+-FreeRTOS\10.3.0\CMSIS\RTOS2\FreeRTOS\Include -IC:\Users\A7MA_\AppData\Local\Ar
+m\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include -IC:\Users\A7MA_\AppData\Local
+\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\portable\RVDS\ARM_CM4F -IC:\Users\A
+7MA_\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Users\A7MA
+_\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129 --predefin
+e="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ S
+ETA 1" --predefine="TM4C1294NCPDT SETA 1" --list=.\listings\startup_tm4c129.lst
+ RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 
 
 
@@ -1700,8 +1700,9 @@ Symbol: GPIOF_Handler
    Definitions
       At line 444 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
+      At line 114 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 445 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
-Comment: GPIOF_Handler used once
+
 GPIOG_Handler 00000058
 
 Symbol: GPIOG_Handler
@@ -1726,9 +1727,8 @@ Symbol: GPIOJ_Handler
    Definitions
       At line 570 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 135 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
       At line 571 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
-
+Comment: GPIOJ_Handler used once
 GPIOK_Handler 00000082
 
 Symbol: GPIOK_Handler
@@ -2792,7 +2792,7 @@ Symbol: TrainCrossingHandler
    Definitions
       At line 63 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
    Uses
-      At line 114 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
+      At line 135 in file RTE\Device\TM4C1294NCPDT\startup_TM4C129.s
 Comment: TrainCrossingHandler used once
 __main 00000000
 

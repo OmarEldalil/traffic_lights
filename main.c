@@ -11,16 +11,17 @@
 #include "driverlib/rom_map.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
+#include "driverlib/timer.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
-
 #include "basic_io.h"
 
-#define tgn_tgs 5000
-#define tge_tgw 2500
-#define tcross 10000
+#define TGN_TGS 5000
+#define TGE_TGW 2500
+#define TCROSS 10000
 #define tsafety 30000
+#define TSAFETY 30
 
 #define North GPIO_PIN_0
 #define South GPIO_PIN_1
@@ -32,13 +33,21 @@
 #define SesorLeft GPIO_PIN_0
 #define SesorRight GPIO_PIN_1
 #define GateLEDAndSiren GPIO_PIN_2
-#define TrainPort GPIO_PORTF_BASE
+#define TrainPort GPIO_PORTJ_BASE
 
 #define GREEN_LED 0x08
 #define RED_LED 0x02
 
+xSemaphoreHandle xNormalSemaphore;
 xSemaphoreHandle xPedestrianSemaphore;
 xSemaphoreHandle xTrainSemaphore;
+
+//****************************************************************************
+//
+// System clock rate in Hz.
+//
+//****************************************************************************
+uint32_t g_ui32SysClock;
 
 /*
  *RED light is 0
@@ -47,6 +56,11 @@ xSemaphoreHandle xTrainSemaphore;
 
 int globalStateOfNorthAndSouth = 0;
 int globalStateOfEastAndWest = 0;
+
+
+/* train handler flags*/
+uint32_t trainFlag = 0;
+uint32_t trainSource = 0;
 
 void delayMS(int delayTimeMs)
 {
@@ -61,21 +75,82 @@ void TrainCrossingHandler()
 {
 	//give semaphore to run the handler with context switching
 	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
-	xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
 
-	//clear the interupt
-	uint32_t status;
-	status = GPIOIntStatus(TrainPort, true);
-	GPIOIntClear(TrainPort, status);
-	portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+	uint32_t status=0;
+
+	status = GPIOIntStatus(GPIO_PORTF_BASE,true);
+	GPIOIntClear(GPIO_PORTF_BASE,status);
+
+	if( (status & GPIO_INT_PIN_0) == GPIO_INT_PIN_0) //Then there was a pin0 interrupt
+	{
+		if(0 == trainFlag) //no train yet 
+		{
+			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
+			portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+			trainFlag = 1;
+			trainSource = 0; // record the angle the train came from
+		}
+		else //there is a train
+		{
+			if(0 == trainSource) //came from the same angle
+			{
+				//do nothing
+			}
+			else
+			{
+				if(1==(*(volatile uint32_t *)(TIMER0_BASE + 0x00C) && 1)) //tsafty isn't passed yet
+				{
+					//do nithing
+				}
+				else
+				{
+					trainFlag = 0; // train has passed
+				}
+			}
+		}
+	} 
+	if( (status & GPIO_INT_PIN_0) == GPIO_INT_PIN_0) ///Then there was a pin1 interrupt
+	{
+		if(0 == trainFlag) //no train yet 
+		{
+			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
+			portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+			trainFlag = 1;
+			trainSource = 1; // record the angle the train came from
+		}
+		else //there is a train
+		{
+			if(1 == trainSource) //came from the same angle
+			{
+				//do nothing
+			}
+			else
+			{
+				if(1==(*(volatile uint32_t *)(TIMER0_BASE + 0x00C) && 1)) //tsafty isn't passed yet
+				{
+					//do nithing
+				}
+				else
+				{
+					trainFlag = 0; // train has passed
+				}
+			}
+		}	
+	}
 }
 
 void PedestrianCrossingHandler()
 {
 	//give semaphore to run the handler with NOOO context switching
-	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
-	xSemaphoreGiveFromISR(xPedestrianSemaphore, &xHigherPriorityTaskWoken);
-
+	if (0 == trainFlag)
+	{
+		portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(xPedestrianSemaphore, &xHigherPriorityTaskWoken);
+	}
+	else
+	{
+		//do nothing, there is a train passing, lights are already red
+	}
 	//clear the interupt
 	uint32_t status;
 	status = GPIOIntStatus(FourCrossingsPedestrianPort, true);
@@ -95,57 +170,6 @@ void setEastAndWest(int state)
 	GPIOPinWrite(FourCrossingsLEDsPort, West, state);
 	globalStateOfEastAndWest = state;
 }
-void normalMode(void *pvParameters)
-{
-	setNorthAndSouth(1);
-	setEastAndWest(0);
-
-	//busy waiting
-	delayMS(tgn_tgs);
-
-	//to make this task blocked to check if the pedestrians' buttons are clicked to run pedestrianMode
-	taskYIELD();
-
-	setNorthAndSouth(0);
-	setEastAndWest(1);
-
-	delayMS(tge_tgw);
-
-	//to make this task blocked to check if the pedestrians' buttons are clicked to run pedestrianMode
-	taskYIELD();
-}
-
-void pedestrianMode(void *pvParameters)
-{
-	xSemaphoreTake(xPedestrianSemaphore, portMAX_DELAY);
-
-	setNorthAndSouth(0);
-	setEastAndWest(0);
-
-	delayMS(tcross);
-}
-
-void trainMode(void *pvParameters)
-{
-	xSemaphoreTake(xTrainSemaphore, portMAX_DELAY);
-
-	int tempNS = globalStateOfNorthAndSouth;
-	int tempES = globalStateOfEastAndWest;
-
-	setNorthAndSouth(0);
-	setEastAndWest(0);
-
-	//turn on red LED and run the siren
-	GPIOPinWrite(TrainPort, GateLEDAndSiren, 1);
-
-	delayMS(tsafety);
-
-	//turn off red LED and run the siren
-	GPIOPinWrite(TrainPort, GateLEDAndSiren, 0);
-
-	setNorthAndSouth(tempNS);
-	setEastAndWest(tempES);
-}
 
 void setupInputPins()
 {
@@ -157,6 +181,8 @@ void setupInputPins()
 
 	GPIOPinTypeGPIOInput(TrainPort, SesorLeft);
 	GPIOPinTypeGPIOInput(TrainPort, SesorRight);
+	GPIOPadConfigSet(TrainPort ,SesorLeft,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);
+	GPIOPadConfigSet(TrainPort ,SesorRight,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);
 }
 
 void setupOutputPins()
@@ -172,43 +198,137 @@ void setupOutputPins()
 
 void sysInit()
 {
-	SysCtlClockFreqSet((SYSCTL_SYSDIV_4 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN), 120000000);
+    //
+    // Set the clocking to run directly from the crystal at 120MHz.
+    //
+    g_ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+                                             SYSCTL_OSC_MAIN |
+                                             SYSCTL_USE_PLL |
+                                             SYSCTL_CFG_VCO_480), 120000000);
+
 
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOJ);
 }
-
+void timerStart(uint32_t seconds)
+{
+			TimerConfigure(TIMER0_BASE, TIMER_CFG_A_ONE_SHOT);
+			TimerLoadSet(TIMER0_BASE, TIMER_A, g_ui32SysClock * seconds);
+			TimerValueGet(TIMER0_BASE, TIMER_A);
+			TimerEnable(TIMER0_BASE, TIMER_A);
+}
 void enableInterrupts()
 {
 
-	IntMasterEnable();
 
-	GPIOIntEnable(FourCrossingsPedestrianPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1 | GPIO_INT_PIN_2 | GPIO_INT_PIN_3));
-
+	//GPIOIntEnable(FourCrossingsPedestrianPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1 | GPIO_INT_PIN_2 | GPIO_INT_PIN_3));
+	GPIOIntTypeSet(TrainPort,GPIO_PIN_0,GPIO_FALLING_EDGE);
+	GPIOIntTypeSet(TrainPort,GPIO_PIN_1,GPIO_FALLING_EDGE);
 	GPIOIntEnable(TrainPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1));
+	IntMasterEnable();
+}
+
+void eastWest(void *pvParameters)
+{
+//	TickType_t xLastWakeTime;
+//	xLastWakeTime = xTaskGetTickCount();
+	for (;;)
+	{
+		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+		//nl3ab fe el lomad
+		//vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TGE_TGW ) );
+		delayMS(TGE_TGW);
+		xSemaphoreGive(xNormalSemaphore);
+		taskYIELD();
+	}
+}
+void northSouth(void *pvParameters)
+{
+	//TickType_t xLastWakeTime;
+	//xLastWakeTime = xTaskGetTickCount();
+	for (;;)
+	{
+		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+		//nl3ab fe el lomad
+		delayMS(TGN_TGS);
+		//vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TGN_TGS ) );
+		
+		xSemaphoreGive(xNormalSemaphore);
+		taskYIELD();
+	}
+}
+
+void pedestrianMode(void *pvParameters)
+{
+	TickType_t xLastWakeTime;
+	xLastWakeTime = xTaskGetTickCount();
+	for (;;)
+	{
+		xSemaphoreTake(xPedestrianSemaphore, portMAX_DELAY);
+		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+		//nl3ab fe el lomad
+		vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TCROSS ) );
+		
+		xSemaphoreGive(xNormalSemaphore);
+	}
+}
+
+void trainMode(void *pvParameters)
+{
+	for (;;)
+	{
+		xSemaphoreTake(xTrainSemaphore, portMAX_DELAY);
+		int tempNS = globalStateOfNorthAndSouth;
+		int tempES = globalStateOfEastAndWest;
+
+		setNorthAndSouth(0);
+		setEastAndWest(0);
+
+		//turn on red LED and run the siren
+		GPIOPinWrite(TrainPort, GateLEDAndSiren, 1);
+		timerStart(TSAFETY);
+			
+
+			// will be false when the imer ends
+			while( 1 == trainFlag) 
+			{
+				//red leds on
+				delayMS(1000);
+				//red leds off
+				delayMS(1000);
+			}
+		//turn off red LED and run the siren
+		GPIOPinWrite(TrainPort, GateLEDAndSiren, 0);
+
+		setNorthAndSouth(tempNS);
+		setEastAndWest(tempES);
+	}
 }
 
 int main(void)
 {
 	sysInit();
 
-	enableInterrupts();
-
 	setupOutputPins();
 
 	setupInputPins();
+	enableInterrupts();
 
+	vSemaphoreCreateBinary(xNormalSemaphore);
 	vSemaphoreCreateBinary(xPedestrianSemaphore);
+	vSemaphoreCreateBinary(xTrainSemaphore);
 
-	if (xPedestrianSemaphore != NULL)
+	if ( xNormalSemaphore != NULL && xPedestrianSemaphore != NULL && xTrainSemaphore != NULL)
 	{
-		xTaskCreate(normalMode, "normal", 256, NULL, 1, NULL);
+		xTaskCreate(eastWest, "eastWest", 256, NULL, 1, NULL);
+		xTaskCreate(northSouth, "northSouth", 256, NULL, 1, NULL);
 		xTaskCreate(pedestrianMode, "pedestrian", 256, NULL, 2, NULL);
 		xTaskCreate(trainMode, "train", 256, NULL, 3, NULL);
 
+		xSemaphoreGive(xNormalSemaphore);
 		vTaskStartScheduler();
 	}
-	for (;;)
-		;
+
+	for (;;);
 }

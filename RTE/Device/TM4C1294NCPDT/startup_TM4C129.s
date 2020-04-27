@@ -111,7 +111,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     COMP2_Handler             ;  27: Analog Comparator 2
                 DCD     SYSCTL_Handler            ;  28: System Control (PLL, OSC, BO)
                 DCD     FLASH_Handler             ;  29: FLASH Control
-                DCD     TrainCrossingHandler             ;  30: GPIO Port F
+                DCD     GPIOF_Handler             ;  30: GPIO Port F
                 DCD     GPIOG_Handler             ;  31: GPIO Port G
                 DCD     GPIOH_Handler             ;  32: GPIO Port H
                 DCD     UART2_Handler             ;  33: UART2 Rx and Tx
@@ -132,7 +132,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     ADC1SS2_Handler           ;  48: ADC1 Sequence 2
                 DCD     ADC1SS3_Handler           ;  49: ADC1 Sequence 3
                 DCD     EBI0_Handler              ;  50: External Bus Interface 0
-                DCD     GPIOJ_Handler             ;  51: GPIO Port J
+                DCD     TrainCrossingHandler             ;  51: GPIO Port J
                 DCD     GPIOK_Handler             ;  52: GPIO Port K
                 DCD     GPIOL_Handler             ;  53: GPIO Port L
                 DCD     SSI2_Handler              ;  54: SSI2 Rx and Tx
