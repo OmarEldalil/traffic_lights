@@ -30,15 +30,15 @@ Rebuild target 'Target 1'
 assembling startup_TM4C129.s...
 compiling list.c...
 compiling freertos_evr.c...
-compiling basic_io.c...
 compiling system_TM4C129.c...
-compiling heap_4.c...
+compiling basic_io.c...
 compiling main.c...
+compiling heap_4.c...
 compiling port.c...
 compiling queue.c...
 compiling tasks.c...
 linking...
-Program Size: Code=9796 RO-data=1408 RW-data=1644 ZI-data=9128  
+Program Size: Code=10180 RO-data=1960 RW-data=1644 ZI-data=9128  
 FromELF: creating hex file...
 ".\Objects\traffic_lights.axf" - 0 Error(s), 0 Warning(s).
 
@@ -80,13 +80,13 @@ Package Vendor: Keil
 
    * Component: ARM.FreeRTOS::RTOS:Core:Cortex-M:10.2.1
       Source file:   Source\portable\GCC\ARM_CM4F\port.c
-      Source file:   Source\tasks.c
-      Include file:  Source\include\task.h
-      Source file:   Source\list.c
-      Source file:   Source\queue.c
-      Include file:  Source\include\queue.h
       Include file:  Source\include\semphr.h
       Include file:  Source\include\FreeRTOS.h
+      Source file:   Source\list.c
+      Include file:  Source\include\task.h
+      Source file:   Source\queue.c
+      Source file:   Source\tasks.c
+      Include file:  Source\include\queue.h
       Source file:   CMSIS\RTOS2\FreeRTOS\Source\freertos_evr.c
 
    * Component: ARM.FreeRTOS::RTOS:Heap:Heap_4:10.2.1
@@ -96,8 +96,8 @@ Package Vendor: Keil
 
    * Component: Keil::Device:Startup:1.0.0
       Include file:  Device\Include\TM4C129\TM4C129.h
-      Source file:   Device\Source\system_TM4C129.c
       Source file:   Device\Source\ARM\startup_TM4C129.s
+      Source file:   Device\Source\system_TM4C129.c
 Build Time Elapsed:  00:00:02
 </pre>
 </body>

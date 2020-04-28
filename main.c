@@ -6,12 +6,16 @@
 #include "driverlib/debug.h"
 #include "driverlib/gpio.h"
 #include "driverlib/interrupt.h"
-#include "driverlib/pin_map.h"
 #include "driverlib/rom.h"
 #include "driverlib/rom_map.h"
 #include "driverlib/sysctl.h"
 #include "driverlib/uart.h"
 #include "driverlib/timer.h"
+#include "driverlib/pwm.h"
+
+#define PART_TM4C1294NCPDT
+#include "driverlib/pin_map.h"
+
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
@@ -71,91 +75,6 @@ void delayMS(int delayTimeMs)
 	SysCtlDelay(delayTimeMs * (120000000 / 3 / 1000));
 }
 
-void TrainCrossingHandler()
-{
-	//give semaphore to run the handler with context switching
-	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
-
-	uint32_t status=0;
-
-	status = GPIOIntStatus(GPIO_PORTJ_BASE,true);
-	GPIOIntClear(GPIO_PORTJ_BASE,status);
-
-	if( (status & GPIO_INT_PIN_0) == GPIO_INT_PIN_0) //Then there was a pin0 interrupt
-	{
-		if(0 == trainFlag) //no train yet 
-		{
-			trainFlag = 1; //train mode is on
-			trainSource = 0; // record the angle the train came from
-			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
-			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-		}
-		else //there is a train
-		{
-			if(0 == trainSource) //came from the same angle
-			{
-				//do nothing
-			}
-			else
-			{
-				if(1==(*(volatile uint32_t *)(TIMER0_BASE + 0x00C) && 1)) //tsafty isn't passed yet
-				{
-					//do nithing
-				}
-				else
-				{
-					trainFlag = 0; // train has passed
-				}
-			}
-		}
-	} 
-	if( (status & GPIO_INT_PIN_1) == GPIO_INT_PIN_1) ///Then there was a pin1 interrupt
-	{
-		if(0 == trainFlag) //no train yet 
-		{
-			trainFlag = 1; // train mode on
-			trainSource = 1; // record the angle the train came from
-			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
-			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-		}
-		else //there is a train
-		{
-			if(1 == trainSource) //came from the same angle
-			{
-				//do nothing
-			}
-			else
-			{
-				if(1==(*(volatile uint32_t *)(TIMER0_BASE + 0x00C) && 1)) //tsafty isn't passed yet
-				{
-					//do nithing
-				}
-				else
-				{
-					trainFlag = 0; // train has passed
-				}
-			}
-		}	
-	}
-}
-
-void PedestrianCrossingHandler()
-{
-	//give semaphore to run the handler with NOOO context switching
-	if (0 == trainFlag)
-	{
-		portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
-		xSemaphoreGiveFromISR(xPedestrianSemaphore, &xHigherPriorityTaskWoken);
-	}
-	else
-	{
-		//do nothing, there is a train passing, lights are already red
-	}
-	//clear the interupt
-	uint32_t status;
-	status = GPIOIntStatus(FourCrossingsPedestrianPort, true);
-	GPIOIntClear(FourCrossingsPedestrianPort, status);
-}
 
 void setNorthAndSouth(int state)
 {
@@ -211,10 +130,24 @@ void sysInit()
    g_ui32SysClock = SysCtlClockGet();
 SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
+	SysCtlPWMClockSet(SYSCTL_PWMDIV_64);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 //	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
 //	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOJ);
 		while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOJ));
+}
+
+void PWM_Init (void) 
+{
+	GPIOPinConfigure(GPIO_PF1_M0PWM1);
+	GPIOPinTypePWM(GPIO_PORTF_BASE, GPIO_PIN_1);
+	PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN);
+	PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 37500 ); //load value -> 120000000/64/50 -> clk/clk_div/hz , hz for servo = 50
+	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 1875); // this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750
+	PWMOutputState(PWM0_BASE, PWM_OUT_1_BIT, true);
+	PWMGenEnable(PWM0_BASE, PWM_GEN_0);
 }
 void timerStart(uint32_t seconds)
 {
@@ -223,6 +156,95 @@ void timerStart(uint32_t seconds)
 			TimerValueGet(TIMER0_BASE, TIMER_A);
 			TimerEnable(TIMER0_BASE, TIMER_A);
 }
+
+void TrainCrossingHandler()
+{
+	//give semaphore to run the handler with context switching
+	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+
+	uint32_t status=0;
+
+	status = GPIOIntStatus(GPIO_PORTJ_BASE,true);
+	GPIOIntClear(GPIO_PORTJ_BASE,status);
+
+	if( (status & GPIO_INT_PIN_0) == GPIO_INT_PIN_0) //Then there was a pin0 interrupt
+	{
+		if(0 == trainFlag) //no train yet 
+		{
+			trainFlag = 1; //train mode is on
+			trainSource = 0; // record the angle the train came from
+			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
+			timerStart(TSAFETY);
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		}
+		else //there is a train
+		{
+			if(0 == trainSource) //came from the same angle
+			{
+				//do nothing
+			}
+			else
+			{
+				if(1==(*(volatile uint32_t *)(TIMER0_BASE + 0x00C) && 1)) //tsafty isn't passed yet
+				{
+					//do nithing
+				}
+				else
+				{
+					trainFlag = 0; // train has passed
+				}
+			}
+		}
+	} 
+	if( (status & GPIO_INT_PIN_1) == GPIO_INT_PIN_1) ///Then there was a pin1 interrupt
+	{
+		if(0 == trainFlag) //no train yet 
+		{
+			trainFlag = 1; // train mode on
+			trainSource = 1; // record the angle the train came from
+			xSemaphoreGiveFromISR(xTrainSemaphore, &xHigherPriorityTaskWoken);
+			timerStart(TSAFETY);
+			portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+		}
+		else //there is a train
+		{
+			if(1 == trainSource) //came from the same angle
+			{
+				//do nothing
+			}
+			else
+			{
+				if(1==(*(volatile uint32_t *)(TIMER0_BASE + 0x00C) && 1)) //tsafty isn't passed yet
+				{
+					//do nithing
+				}
+				else
+				{
+					trainFlag = 0; // train has passed
+				}
+			}
+		}	
+	}
+}
+
+void PedestrianCrossingHandler()
+{
+	//give semaphore to run the handler with NOOO context switching
+	if (0 == trainFlag)
+	{
+		portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
+		xSemaphoreGiveFromISR(xPedestrianSemaphore, &xHigherPriorityTaskWoken);
+	}
+	else
+	{
+		//do nothing, there is a train passing, lights are already red
+	}
+	//clear the interupt
+	uint32_t status;
+	status = GPIOIntStatus(FourCrossingsPedestrianPort, true);
+	GPIOIntClear(FourCrossingsPedestrianPort, status);
+}
+
 void enableInterrupts()
 {
 
@@ -293,28 +315,30 @@ void trainMode(void *pvParameters)
 	for (;;)
 	{
 		xSemaphoreTake(xTrainSemaphore, portMAX_DELAY);
-//		int tempNS = globalStateOfNorthAndSouth;
-//		int tempES = globalStateOfEastAndWest;
-
+		int tempNS = globalStateOfNorthAndSouth;
+		int tempES = globalStateOfEastAndWest;
 //		setNorthAndSouth(0);
 //		setEastAndWest(0);
 
+		//timerStart(TSAFETY);
 		//turn on red LED and run the siren
 		GPIOPinWrite(TrainPort, GateLEDAndSiren, 1);
-		timerStart(TSAFETY);
+		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
+		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 3750);
+		
+		
 			
 
 			// will be false when the imer ends
 			while( 1 == trainFlag) 
 			{
-				//red leds on
-				delayMS(1000);
-				//red leds off
-				delayMS(1000);
+				//red leds toggle
+				delayMS(500);
 			}
 		//turn off red LED and run the siren
 		GPIOPinWrite(TrainPort, GateLEDAndSiren, 0);
-
+		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
+		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 1875);
 //		setNorthAndSouth(tempNS);
 //		setEastAndWest(tempES);
 	}
@@ -323,7 +347,7 @@ void trainMode(void *pvParameters)
 int main(void)
 {
 	sysInit();
-
+	PWM_Init();
 	setupOutputPins();
 
 	setupInputPins();

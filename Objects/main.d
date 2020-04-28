@@ -7,12 +7,13 @@
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\debug.h \
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\gpio.h \
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\interrupt.h \
-  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\pin_map.h \
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom.h \
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rom_map.h \
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\sysctl.h \
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\uart.h \
   C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\timer.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\pwm.h \
+  C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\pin_map.h \
   C:\Users\A7MA_\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\10.3.0\Source\include\FreeRTOS.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
   RTE\RTOS\FreeRTOSConfig.h \
