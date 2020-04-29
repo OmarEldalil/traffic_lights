@@ -10,7 +10,7 @@
 //#include "driverlib/rom.h"
 //#include "driverlib/rom_map.h"
 #include "driverlib/sysctl.h"
-//#include "driverlib/uart.h"
+#include "driverlib/uart.h"
 #include "driverlib/timer.h"
 #include "driverlib/pwm.h"
 
@@ -169,11 +169,28 @@ void sysInit()
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
 	SysCtlPWMClockSet(SYSCTL_PWMDIV_64);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOJ);
 	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOJ));
+}
+
+void
+UARTSend(const uint8_t *pui8Buffer, uint32_t ui32Count)
+{
+    //
+    // Loop while there are more characters to send.
+    //
+    while(ui32Count--)
+    {
+        //
+        // Write the next character to the UART.
+        //
+        UARTCharPutNonBlocking(UART0_BASE, *pui8Buffer++);
+    }
 }
 
 void PWM_Init (void) 
@@ -185,6 +202,34 @@ void PWM_Init (void)
 	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 1875); // this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750
 	PWMOutputState(PWM0_BASE, PWM_OUT_1_BIT, true);
 	PWMGenEnable(PWM0_BASE, PWM_GEN_0);
+}
+
+void UART_Init(void)
+{
+	  //
+    // Set GPIO A0 and A1 as UART pins.
+    //
+    GPIOPinConfigure(GPIO_PA0_U0RX);
+    GPIOPinConfigure(GPIO_PA1_U0TX);
+    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+
+    //
+    // Configure the UART for 115,200, 8-N-1 operation.
+    //
+    UARTConfigSetExpClk(UART0_BASE, g_ui32SysClock, 115200,
+                            (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
+                             UART_CONFIG_PAR_NONE));
+
+    //
+    // Enable the UART interrupt.
+    //
+    IntEnable(INT_UART0_TM4C129);
+    UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT);
+
+    //
+    // Prompt for text to be entered.
+    //
+    UARTSend((uint8_t *)"UART start, ", 12);
 }
 void timerStart(uint32_t seconds)
 {
@@ -309,6 +354,7 @@ void eastWest(void *pvParameters)
 	for (;;)
 	{
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+		UARTSend((uint8_t *)"eastWest start, ", 16);
 //		vPrintString("east and west road \n");
 		//nl3ab fe el lomad
 		setEastAndWest(0xff);
@@ -327,6 +373,7 @@ void northSouth(void *pvParameters)
 	for (;;)
 	{
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+		UARTSend((uint8_t *)"northSouth start, ", 18);
 //		vPrintString("norht and south road \n");
 		//nl3ab fe el lomad
 		setNorthAndSouth(0xff);
@@ -348,6 +395,7 @@ void pedestrianMode(void *pvParameters)
 	{
 		xSemaphoreTake(xPedestrianSemaphore, portMAX_DELAY);
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+		UARTSend((uint8_t *)"pedestrian start, ", 18);
 //		vPrintString("pedestrians passing \n");
 		//nl3ab fe el lomad
 		setGREEN(0x00);
@@ -364,6 +412,7 @@ void trainMode(void *pvParameters)
 	{
 		xSemaphoreTake(xTrainSemaphore, portMAX_DELAY);
 //		vPrintString("train is passing \n");
+		UARTSend((uint8_t *)"train start, ", 13);
 		uint8_t tempNS = globalStateOfNorthAndSouth;
 		uint8_t tempES = globalStateOfEastAndWest;
 		setGREEN(0x00);
@@ -397,6 +446,7 @@ int main(void)
 {
 	sysInit();
 	PWM_Init();
+	UART_Init();
 	setupOutputPins();
 
 	setupInputPins();
