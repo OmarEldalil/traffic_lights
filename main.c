@@ -1,7 +1,13 @@
+/****************************************************************************/
+/*************************		standard includes 	***************************/
+/****************************************************************************/
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
 
+/****************************************************************************/
+/*************************		TivaWare includes 	***************************/
+/****************************************************************************/
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "driverlib/debug.h"
@@ -17,6 +23,9 @@
 #define PART_TM4C1294NCPDT
 #include "driverlib/pin_map.h"
 
+/****************************************************************************/
+/*************************		FreeRTOS includes 	***************************/
+/****************************************************************************/
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"
@@ -45,30 +54,31 @@
 #define GREEN_LED 0x08
 #define RED_LED 0x02
 
+/****************************************************************************/
+/****************semaphores to synchronize between tasks*********************/
+/****************************************************************************/
 xSemaphoreHandle xNormalSemaphore;
 xSemaphoreHandle xPedestrianSemaphore;
 xSemaphoreHandle xTrainSemaphore;
 
-//****************************************************************************
-//
-// System clock rate in Hz.
-//
-//****************************************************************************
+/****************************************************************************/
+/*******************************System clock rate in Hz.*********************/
+/****************************************************************************/
 uint32_t g_ui32SysClock;
 
-/*
- *RED light is 0
- *Green light is 1
-*/
 
-int globalStateOfNorthAndSouth = 0;
-int globalStateOfEastAndWest = 0;
+uint8_t globalStateOfNorthAndSouth = 0;
+uint8_t globalStateOfEastAndWest = 0;
 
-
-/* train handler flags*/
+/****************************************************************************/
+/******************					train handler flags					*********************/
+/****************************************************************************/
 uint32_t trainFlag = 0;
 uint32_t trainSource = 0;
 
+/****************************************************************************/
+/******************					busy waiting delay					*********************/
+/****************************************************************************/
 void delayMS(int delayTimeMs)
 {
 	// 1 clock cycle = (1 / 120000000) second
@@ -78,24 +88,38 @@ void delayMS(int delayTimeMs)
 	SysCtlDelay(delayTimeMs * (120000000 / 3 / 1000));
 }
 
+/****************************************************************************/
+/******************					control red LEDS						*********************/
+/****************************************************************************/
 void setRED(int state)
 {
+	IntMasterDisable();
 	GPIOPinWrite(FourCrossingsLEDsPortRED, North, state);
 	GPIOPinWrite(FourCrossingsLEDsPortRED, South, state);
 	GPIOPinWrite(FourCrossingsLEDsPortRED, East, state);
 	GPIOPinWrite(FourCrossingsLEDsPortRED, West, state);
+	IntMasterEnable();
 }
 
+/****************************************************************************/
+/******************					control Green LEDS					*********************/
+/****************************************************************************/
 void setGREEN(uint8_t state)
 {
+	IntMasterDisable();
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, North, state);
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, South, state);
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, East, state);
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, West, state);
+	IntMasterEnable();
 }
 
+/****************************************************************************/
+/**********		control NorthAndSouth traffic LEDS				*********************/
+/****************************************************************************/
 void setNorthAndSouth(uint8_t state)
 {
+	IntMasterDisable();
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, North, state);
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, South, state);
 	GPIOPinWrite(FourCrossingsLEDsPortRED, East, state);
@@ -107,10 +131,15 @@ void setNorthAndSouth(uint8_t state)
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, West, !state);
 	
 	globalStateOfNorthAndSouth = state;
+	IntMasterEnable();
 }
 
+/****************************************************************************/
+/**********			control EastAndWest traffic LEDS				*********************/
+/****************************************************************************/
 void setEastAndWest(int state)
 {
+	IntMasterDisable();
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, East, state);
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, West, state);
 	GPIOPinWrite(FourCrossingsLEDsPortRED, North, state);
@@ -122,12 +151,13 @@ void setEastAndWest(int state)
 	GPIOPinWrite(FourCrossingsLEDsPortGREEN, South, !state);
 	
 	globalStateOfEastAndWest = state;
+	IntMasterEnable();
 }
 
 void setupInputPins()
 {
 	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, GPIO_PIN_3);
-	GPIOPadConfigSet(FourCrossingsPedestrianPort ,GPIO_PIN_3,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);
+	GPIOPadConfigSet(FourCrossingsPedestrianPort,GPIO_PIN_3,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);
 
 	GPIOPinTypeGPIOInput(TrainPort, SesorLeft);
 	GPIOPinTypeGPIOInput(TrainPort, SesorRight);
@@ -157,40 +187,56 @@ void setupOutputPins()
 
 void sysInit()
 {
-    //
-    // Set the clocking to run directly from the crystal at 120MHz.
-    //
+	/****************************************************************************/
+	/********Set the clocking to run directly from the crystal at 120MHz.********/
+	/****************************************************************************/
 	g_ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
 											 SYSCTL_OSC_MAIN |
 											 SYSCTL_USE_PLL |
 											 SYSCTL_CFG_VCO_480), 120000000);
-
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
-	SysCtlPWMClockSet(SYSCTL_PWMDIV_64);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
+	
+	/****************************************************************************/
+	/******************			Enabling Peripherals clock									*********/
+	/****************************************************************************/
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOJ);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
+	/****************************************************************************/
+	/******************			Enabling Modules clock											*********/
+	/****************************************************************************/
+	SysCtlPWMClockSet(SYSCTL_PWMDIV_64);							/*devide PWM Clk Src by 64*/
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+	/****************************************************************************/
+	/******************			waiting till clocks are ready								*********/
+	/****************************************************************************/	
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOA));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF));
 	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOJ));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOK));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOL));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_PWM0));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_UART0));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_TIMER0));
 }
 
-void
-UARTSend(const uint8_t *pui8Buffer, uint32_t ui32Count)
+void UARTSend(const uint8_t *pui8Buffer, uint32_t ui32Count)
 {
-    //
-    // Loop while there are more characters to send.
-    //
-    while(ui32Count--)
-    {
-        //
-        // Write the next character to the UART.
-        //
-        UARTCharPutNonBlocking(UART0_BASE, *pui8Buffer++);
-    }
+	/****************************************************************************/
+	/**************		Loop while there are more characters to send			*********/
+	/****************************************************************************/
+	while(ui32Count--)
+	{
+		/**************************************************************************/
+		/************				Write the next character to the UART.					*********/
+		/**************************************************************************/
+		UARTCharPutNonBlocking(UART0_BASE, *pui8Buffer++);
+	}
 }
 
 void PWM_Init (void) 
@@ -206,30 +252,30 @@ void PWM_Init (void)
 
 void UART_Init(void)
 {
-	  //
-    // Set GPIO A0 and A1 as UART pins.
-    //
-    GPIOPinConfigure(GPIO_PA0_U0RX);
-    GPIOPinConfigure(GPIO_PA1_U0TX);
-    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+	/****************************************************************************/
+	/******************			Set GPIO A0 and A1 as UART pins.						*********/
+	/****************************************************************************/
+	GPIOPinConfigure(GPIO_PA0_U0RX);
+	GPIOPinConfigure(GPIO_PA1_U0TX);
+	GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+	
+	/****************************************************************************/
+	/************			Configure the UART for 115,200, 8-N-1 operation.	*********/
+	/****************************************************************************/
+	UARTConfigSetExpClk(UART0_BASE, g_ui32SysClock, 115200,
+													(UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
+													 UART_CONFIG_PAR_NONE));
 
-    //
-    // Configure the UART for 115,200, 8-N-1 operation.
-    //
-    UARTConfigSetExpClk(UART0_BASE, g_ui32SysClock, 115200,
-                            (UART_CONFIG_WLEN_8 | UART_CONFIG_STOP_ONE |
-                             UART_CONFIG_PAR_NONE));
+	/****************************************************************************/
+	/******************			Enable the UART interrupt.									*********/
+	/****************************************************************************/
+	IntEnable(INT_UART0_TM4C129);
+	UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT);
 
-    //
-    // Enable the UART interrupt.
-    //
-    IntEnable(INT_UART0_TM4C129);
-    UARTIntEnable(UART0_BASE, UART_INT_RX | UART_INT_RT);
-
-    //
-    // Prompt for text to be entered.
-    //
-    UARTSend((uint8_t *)"UART start, ", 12);
+	/****************************************************************************/
+	/******************					start text over UART										*********/
+	/****************************************************************************/
+	UARTSend((uint8_t *)"UART start, ", 12);
 }
 void timerStart(uint32_t seconds)
 {
@@ -311,11 +357,11 @@ void TrainCrossingHandler()
 
 void PedestrianCrossingHandler()
 {
-		//clear the interupt
+	//clear the interupt
 	uint32_t status;
 	status = GPIOIntStatus(FourCrossingsPedestrianPort, true);
 	GPIOIntClear(FourCrossingsPedestrianPort, status);
-	//give semaphore to run the handler with NOOO context switching
+	//give semaphore to run the handler with context switching
 	if (0 == trainFlag)
 	{
 		portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
@@ -344,7 +390,6 @@ void enableInterrupts()
 	IntRegister(INT_GPIOJ_TM4C129,TrainCrossingHandler);
 	IntEnable(INT_GPIOJ_TM4C129);
 	IntMasterEnable();
-	
 }
 
 void eastWest(void *pvParameters)
@@ -448,7 +493,6 @@ int main(void)
 	PWM_Init();
 	UART_Init();
 	setupOutputPins();
-
 	setupInputPins();
 	enableInterrupts();
 	xNormalSemaphore = xSemaphoreCreateBinary();
