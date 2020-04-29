@@ -22,23 +22,23 @@ Dialog DLL:      TCM.DLL V1.36.5.0
  
 <h2>Project:</h2>
 D:\Knowledge\Masters\CSE643\Project\traffic_lights\traffic_lights.uvprojx
-Project File Date:  04/27/2020
+Project File Date:  04/29/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.13.1', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
 assembling startup_TM4C129.s...
 compiling list.c...
+compiling basic_io.c...
 compiling freertos_evr.c...
 compiling system_TM4C129.c...
-compiling basic_io.c...
-compiling main.c...
-compiling heap_4.c...
 compiling port.c...
+compiling heap_4.c...
+compiling main.c...
 compiling queue.c...
 compiling tasks.c...
 linking...
-Program Size: Code=10180 RO-data=1960 RW-data=1644 ZI-data=9128  
+Program Size: Code=10372 RO-data=1960 RW-data=1644 ZI-data=9136  
 FromELF: creating hex file...
 ".\Objects\traffic_lights.axf" - 0 Error(s), 0 Warning(s).
 
@@ -79,14 +79,14 @@ Package Vendor: Keil
       Include file:  Config\ARMCM\FreeRTOSConfig.h
 
    * Component: ARM.FreeRTOS::RTOS:Core:Cortex-M:10.2.1
-      Source file:   Source\portable\GCC\ARM_CM4F\port.c
-      Include file:  Source\include\semphr.h
       Include file:  Source\include\FreeRTOS.h
-      Source file:   Source\list.c
       Include file:  Source\include\task.h
+      Source file:   Source\list.c
+      Include file:  Source\include\queue.h
+      Include file:  Source\include\semphr.h
       Source file:   Source\queue.c
       Source file:   Source\tasks.c
-      Include file:  Source\include\queue.h
+      Source file:   Source\portable\GCC\ARM_CM4F\port.c
       Source file:   CMSIS\RTOS2\FreeRTOS\Source\freertos_evr.c
 
    * Component: ARM.FreeRTOS::RTOS:Heap:Heap_4:10.2.1
@@ -95,10 +95,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.3.0
 
    * Component: Keil::Device:Startup:1.0.0
+      Source file:   Device\Source\system_TM4C129.c
       Include file:  Device\Include\TM4C129\TM4C129.h
       Source file:   Device\Source\ARM\startup_TM4C129.s
-      Source file:   Device\Source\system_TM4C129.c
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

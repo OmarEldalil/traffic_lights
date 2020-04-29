@@ -1,15 +1,16 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
+
 #include "inc/hw_ints.h"
 #include "inc/hw_memmap.h"
 #include "driverlib/debug.h"
 #include "driverlib/gpio.h"
 #include "driverlib/interrupt.h"
-#include "driverlib/rom.h"
-#include "driverlib/rom_map.h"
+//#include "driverlib/rom.h"
+//#include "driverlib/rom_map.h"
 #include "driverlib/sysctl.h"
-#include "driverlib/uart.h"
+//#include "driverlib/uart.h"
 #include "driverlib/timer.h"
 #include "driverlib/pwm.h"
 
@@ -31,8 +32,10 @@
 #define South GPIO_PIN_1
 #define East GPIO_PIN_2
 #define West GPIO_PIN_3
-#define FourCrossingsLEDsPort GPIO_PORTA_BASE
-#define FourCrossingsPedestrianPort GPIO_PORTB_BASE
+#define FourCrossingsLEDsPortRED GPIO_PORTL_BASE
+#define FourCrossingsLEDsPortGREEN GPIO_PORTK_BASE
+#define FourCrossingsPedestrianPort GPIO_PORTF_BASE
+#define TrainGatePORT GPIO_PORTF_BASE
 
 #define SesorLeft GPIO_PIN_0
 #define SesorRight GPIO_PIN_1
@@ -75,28 +78,56 @@ void delayMS(int delayTimeMs)
 	SysCtlDelay(delayTimeMs * (120000000 / 3 / 1000));
 }
 
-
-void setNorthAndSouth(int state)
+void setRED(int state)
 {
-	GPIOPinWrite(FourCrossingsLEDsPort, North, state);
-	GPIOPinWrite(FourCrossingsLEDsPort, South, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, North, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, South, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, East, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, West, state);
+}
+
+void setGREEN(uint8_t state)
+{
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, North, state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, South, state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, East, state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, West, state);
+}
+
+void setNorthAndSouth(uint8_t state)
+{
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, North, state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, South, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, East, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, West, state);	
+	
+	GPIOPinWrite(FourCrossingsLEDsPortRED, North, !state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, South, !state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, East, !state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, West, !state);
+	
 	globalStateOfNorthAndSouth = state;
 }
 
 void setEastAndWest(int state)
 {
-	GPIOPinWrite(FourCrossingsLEDsPort, East, state);
-	GPIOPinWrite(FourCrossingsLEDsPort, West, state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, East, state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, West, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, North, state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, South, state);	
+	
+	GPIOPinWrite(FourCrossingsLEDsPortRED, East, !state);
+	GPIOPinWrite(FourCrossingsLEDsPortRED, West, !state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, North, !state);
+	GPIOPinWrite(FourCrossingsLEDsPortGREEN, South, !state);
+	
 	globalStateOfEastAndWest = state;
 }
 
 void setupInputPins()
 {
-//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, North);
-//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, South);
-//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, East);
-//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, West);
-//	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, South);
+	GPIOPinTypeGPIOInput(FourCrossingsPedestrianPort, GPIO_PIN_3);
+	GPIOPadConfigSet(FourCrossingsPedestrianPort ,GPIO_PIN_3,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);
 
 	GPIOPinTypeGPIOInput(TrainPort, SesorLeft);
 	GPIOPinTypeGPIOInput(TrainPort, SesorRight);
@@ -107,10 +138,16 @@ void setupInputPins()
 void setupOutputPins()
 {
 
-//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, North);
-//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, South);
-//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, East);
-//	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPort, West);
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortRED, North);
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortRED, South);
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortRED, East);
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortRED, West);
+	
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortGREEN, North);
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortGREEN, South);
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortGREEN, East);
+	GPIOPinTypeGPIOOutput(FourCrossingsLEDsPortGREEN, West);
+	GPIOPinTypeGPIOOutput(TrainGatePORT, GateLEDAndSiren);
 
 	//GPIOPinTypeGPIOOutput(TrainPort, GateLEDAndSiren);
 	
@@ -127,16 +164,16 @@ void sysInit()
 											 SYSCTL_OSC_MAIN |
 											 SYSCTL_USE_PLL |
 											 SYSCTL_CFG_VCO_480), 120000000);
-   g_ui32SysClock = SysCtlClockGet();
-SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
 	SysCtlPWMClockSet(SYSCTL_PWMDIV_64);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_PWM0);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOJ);
-		while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOJ));
+	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOJ));
 }
 
 void PWM_Init (void) 
@@ -229,27 +266,31 @@ void TrainCrossingHandler()
 
 void PedestrianCrossingHandler()
 {
+		//clear the interupt
+	uint32_t status;
+	status = GPIOIntStatus(FourCrossingsPedestrianPort, true);
+	GPIOIntClear(FourCrossingsPedestrianPort, status);
 	//give semaphore to run the handler with NOOO context switching
 	if (0 == trainFlag)
 	{
 		portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 		xSemaphoreGiveFromISR(xPedestrianSemaphore, &xHigherPriorityTaskWoken);
+		portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 	}
 	else
 	{
 		//do nothing, there is a train passing, lights are already red
 	}
-	//clear the interupt
-	uint32_t status;
-	status = GPIOIntStatus(FourCrossingsPedestrianPort, true);
-	GPIOIntClear(FourCrossingsPedestrianPort, status);
+
 }
 
 void enableInterrupts()
 {
-
-
-	//GPIOIntEnable(FourCrossingsPedestrianPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1 | GPIO_INT_PIN_2 | GPIO_INT_PIN_3));
+	GPIOIntEnable(FourCrossingsPedestrianPort, GPIO_INT_PIN_3);
+	GPIOIntTypeSet(FourCrossingsPedestrianPort,GPIO_PIN_3,GPIO_FALLING_EDGE);
+	IntPrioritySet(INT_GPIOF_TM4C129 ,0xE0);
+	IntRegister(INT_GPIOF_TM4C129,PedestrianCrossingHandler);
+	IntEnable(INT_GPIOF_TM4C129);
 	
 	GPIOIntEnable(TrainPort, (GPIO_INT_PIN_0 | GPIO_INT_PIN_1));
 	GPIOIntTypeSet(TrainPort,GPIO_PIN_0,GPIO_FALLING_EDGE);
@@ -268,7 +309,9 @@ void eastWest(void *pvParameters)
 	for (;;)
 	{
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+//		vPrintString("east and west road \n");
 		//nl3ab fe el lomad
+		setEastAndWest(0xff);
 		//vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TGE_TGW ) );
 		GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, 0xFF);
 		delayMS(TGE_TGW);
@@ -284,7 +327,9 @@ void northSouth(void *pvParameters)
 	for (;;)
 	{
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+//		vPrintString("norht and south road \n");
 		//nl3ab fe el lomad
+		setNorthAndSouth(0xff);
 		GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0x1);
 		delayMS(TGN_TGS);
 		GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, 0x0);
@@ -303,7 +348,10 @@ void pedestrianMode(void *pvParameters)
 	{
 		xSemaphoreTake(xPedestrianSemaphore, portMAX_DELAY);
 		xSemaphoreTake(xNormalSemaphore, portMAX_DELAY);
+//		vPrintString("pedestrians passing \n");
 		//nl3ab fe el lomad
+		setGREEN(0x00);
+		setRED(0xff);
 		vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TCROSS ) );
 		
 		xSemaphoreGive(xNormalSemaphore);
@@ -315,32 +363,33 @@ void trainMode(void *pvParameters)
 	for (;;)
 	{
 		xSemaphoreTake(xTrainSemaphore, portMAX_DELAY);
-		int tempNS = globalStateOfNorthAndSouth;
-		int tempES = globalStateOfEastAndWest;
-//		setNorthAndSouth(0);
-//		setEastAndWest(0);
-
-		//timerStart(TSAFETY);
+//		vPrintString("train is passing \n");
+		uint8_t tempNS = globalStateOfNorthAndSouth;
+		uint8_t tempES = globalStateOfEastAndWest;
+		setGREEN(0x00);
+		setRED(0xFF);
 		//turn on red LED and run the siren
-		GPIOPinWrite(TrainPort, GateLEDAndSiren, 1);
+		GPIOPinWrite(TrainGatePORT, GateLEDAndSiren, 0xff);
+		
 		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
 		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 3750);
-		
-		
-			
 
-			// will be false when the imer ends
+			// will be false train passes
 			while( 1 == trainFlag) 
 			{
 				//red leds toggle
+				setRED(0xFF);
+				delayMS(500);
+				setRED(0x00);
 				delayMS(500);
 			}
 		//turn off red LED and run the siren
-		GPIOPinWrite(TrainPort, GateLEDAndSiren, 0);
+		GPIOPinWrite(TrainGatePORT, GateLEDAndSiren, 0);
 		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
 		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 1875);
-//		setNorthAndSouth(tempNS);
-//		setEastAndWest(tempES);
+//		vPrintString("train passed \n");
+	setNorthAndSouth(tempNS);
+	setEastAndWest(tempES);
 	}
 }
 
@@ -358,11 +407,10 @@ int main(void)
 
 	if ( xNormalSemaphore != NULL && xPedestrianSemaphore != NULL && xTrainSemaphore != NULL)
 	{
-		xTaskCreate(eastWest, "eastWest", 256, NULL, 1, NULL);
 		xTaskCreate(northSouth, "northSouth", 256, NULL, 1, NULL);
+		xTaskCreate(eastWest, "eastWest", 256, NULL, 1, NULL);
 		xTaskCreate(pedestrianMode, "pedestrian", 256, NULL, 2, NULL);
 		xTaskCreate(trainMode, "train", 256, NULL, 3, NULL);
-
 		xSemaphoreGive(xNormalSemaphore);
 		vTaskStartScheduler();
 	}
