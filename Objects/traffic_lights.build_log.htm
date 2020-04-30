@@ -29,11 +29,11 @@ Project File Date:  04/29/2020
 Rebuild target 'Target 1'
 assembling startup_TM4C129.s...
 compiling basic_io.c...
-compiling list.c...
-compiling freertos_evr.c...
 compiling system_TM4C129.c...
-compiling heap_4.c...
+compiling freertos_evr.c...
+compiling list.c...
 compiling port.c...
+compiling heap_4.c...
 compiling main.c...
 compiling queue.c...
 compiling tasks.c...
@@ -81,12 +81,12 @@ Package Vendor: Keil
    * Component: ARM.FreeRTOS::RTOS:Core:Cortex-M:10.2.1
       Include file:  Source\include\FreeRTOS.h
       Include file:  Source\include\semphr.h
-      Source file:   Source\tasks.c
-      Source file:   Source\list.c
-      Source file:   Source\queue.c
-      Include file:  Source\include\queue.h
       Include file:  Source\include\task.h
+      Include file:  Source\include\queue.h
+      Source file:   Source\queue.c
+      Source file:   Source\list.c
       Source file:   Source\portable\GCC\ARM_CM4F\port.c
+      Source file:   Source\tasks.c
       Source file:   CMSIS\RTOS2\FreeRTOS\Source\freertos_evr.c
 
    * Component: ARM.FreeRTOS::RTOS:Heap:Heap_4:10.2.1
@@ -95,10 +95,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.3.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Include file:  Device\Include\TM4C129\TM4C129.h
       Source file:   Device\Source\ARM\startup_TM4C129.s
       Source file:   Device\Source\system_TM4C129.c
-Build Time Elapsed:  00:00:01
+      Include file:  Device\Include\TM4C129\TM4C129.h
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

@@ -245,7 +245,7 @@ void PWM_Init (void)
 	GPIOPinTypePWM(GPIO_PORTF_BASE, GPIO_PIN_1);
 	PWMGenConfigure(PWM0_BASE, PWM_GEN_0, PWM_GEN_MODE_DOWN);
 	PWMGenPeriodSet(PWM0_BASE, PWM_GEN_0, 37500 ); //load value -> 120000000/64/50 -> clk/clk_div/hz , hz for servo = 50
-	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 1875); // this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750
+	PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2400); // this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750
 	PWMOutputState(PWM0_BASE, PWM_OUT_1_BIT, true);
 	PWMGenEnable(PWM0_BASE, PWM_GEN_0);
 }
@@ -464,7 +464,7 @@ void trainMode(void *pvParameters)
 		GPIOPinWrite(TrainGatePORT, GateLEDAndSiren, 0xff);
 		
 		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
-		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 3200);
+		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2900);
 
 			// will be false train passes
 			while( 1 == trainFlag) 
@@ -478,7 +478,7 @@ void trainMode(void *pvParameters)
 		//turn off red LED and run the siren
 		GPIOPinWrite(TrainGatePORT, GateLEDAndSiren, 0);
 		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
-		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2200);
+		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2400);
 //		vPrintString("train passed \n");
 	setNorthAndSouth(tempNS);
 	setEastAndWest(tempES);
