@@ -434,8 +434,6 @@ void northSouth(void *pvParameters)
 
 void pedestrianMode(void *pvParameters)
 {
-	TickType_t xLastWakeTime;
-	xLastWakeTime = xTaskGetTickCount();
 	for (;;)
 	{
 		xSemaphoreTake(xPedestrianSemaphore, portMAX_DELAY);
@@ -445,7 +443,7 @@ void pedestrianMode(void *pvParameters)
 		//nl3ab fe el lomad
 		setGREEN(0x00);
 		setRED(0xff);
-		vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( TCROSS ) );
+		vTaskDelay(pdMS_TO_TICKS(TCROSS));
 		
 		xSemaphoreGive(xNormalSemaphore);
 	}
@@ -466,7 +464,7 @@ void trainMode(void *pvParameters)
 		GPIOPinWrite(TrainGatePORT, GateLEDAndSiren, 0xff);
 		
 		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
-		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 3750);
+		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 3200);
 
 			// will be false train passes
 			while( 1 == trainFlag) 
@@ -480,7 +478,7 @@ void trainMode(void *pvParameters)
 		//turn off red LED and run the siren
 		GPIOPinWrite(TrainGatePORT, GateLEDAndSiren, 0);
 		// this number / load value = % of on , for servo -> between .05% and .1%-> 1875 , 3750 , for clk = 120MHZ
-		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 1875);
+		PWMPulseWidthSet(PWM0_BASE, PWM_OUT_1, 2200);
 //		vPrintString("train passed \n");
 	setNorthAndSouth(tempNS);
 	setEastAndWest(tempES);
